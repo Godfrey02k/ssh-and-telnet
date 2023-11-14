@@ -77,8 +77,29 @@ print('--- Username: ', username)
 print('--- Password: ', password)
 print('')
 print('------------------------------------------------------')
+print('-------------------------------------------------------------------------')
+print('')
+print('--- You have logged in succesfully! connecting to:', ip_address)
+print('---                                      Username: ' , username)
+print('---                                      Password: ' , password)
+print('')
+print('-------------------------------------------------------------------------')
 
+#Set the terminal length to 0
+session.sendline('terminal length 0')
+result= session.expect(['#'])
 
+#Check the running config
+session.sendline("show run brief")
+result= session.expect(['#'])
+config_info = session.before
+
+#Write into a file the running config
+outfile = open('config_fileCS.txt', 'w')
+outfile.write(config_info)
+
+#Output the running config
+print('This is the: ',config_info)
 # Terminate SSH session
 session.close()
 
