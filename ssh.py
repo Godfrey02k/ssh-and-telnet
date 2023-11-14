@@ -97,7 +97,7 @@ config_info = session.before
 #Write into a file the running config
 outfile = open('config_fileCS.txt', 'w')
 outfile.write(config_info)
-
+print("did this work?")
 #Output the running config
 print('This is the: ',config_info)
 # Terminate SSH session
