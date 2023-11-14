@@ -17,17 +17,16 @@ result = session.expect(['Password:', pexpect.TIMEOUT, pexpect.EOF])
 
 # Check for error, if exists then display error and exit
 if result != 0:
-print('--- FAILURE! creating session for: ', ip_address)
-exit()
-
+    print('--- FAILURE! creating session for: ', ip_address)
+    exit()
 
 # Session expecting password, enter details
 session.sendline(password)
 result = session.expect(['>', pexpect.TIMEOUT, pexpect.EOF])
 # Check for error, if exists then display error and exit
 if result != 0:
-print('--- FAILURE! entering password: ', password)
-exit()
+    print('--- FAILURE! entering password: ', password)
+    exit()
 
 
 # Enter enable mode
@@ -35,15 +34,15 @@ session.sendline('enable')
 result = session.expect(['Password:', pexpect.TIMEOUT, pexpect.EOF])
 # Check for error, if exists then display error and exit
 if result != 0:
-print('--- Failure! entering enable mode')
-exit()
+    print('--- Failure! entering enable mode')
+    exit()
 # Send enable password details
 session.sendline(password_enable)
 result = session.expect(['#', pexpect.TIMEOUT, pexpect.EOF])
 # Check for error, if exists then display error and exit
 if result != 0:
-print('--- Failure! entering enable mode after sending password')
-exit()
+    print('--- Failure! entering enable mode after sending password')
+    exit()
 
 
 # Enter configuration mode
@@ -51,8 +50,8 @@ session.sendline('configure terminal')
 result = session.expect([r'.\(config\)#', pexpect.TIMEOUT, pexpect.EOF])
 # Check for error, if exists then display error and exit
 if result != 0:
-print('--- Failure! entering config mode')
-exit()
+    print('--- Failure! entering config mode')
+    exit()
 
 
 # Change the hostname to R1
@@ -60,13 +59,13 @@ session.sendline('hostname R1')
 result = session.expect([r'R1\(config\)#', pexpect.TIMEOUT, pexpect.EOF])
 # Check for error, if exists then display error and exit
 if result != 0:
-print('--- Failure! setting hostname')
+    print('--- Failure! setting hostname')
 
 
 # Exit config mode
-session.sendline('exit')
+#session.sendline('exit')
 # Exit enable mode
-session.sendline('exit')
+#session.sendline('exit')
 
 
 print('-------------------------------------------------------------------------')
@@ -81,13 +80,13 @@ print('-------------------------------------------------------------------------
 session.sendline('terminal length 0')
 result= session.expect(['#'])
 
-#Check the running config
+# running config
 session.sendline("show run brief")
 result= session.expect(['#'])
 config_info = session.before
 
-#Write into a file the running config
-outfile = open('config_fileCS.txt', 'w')
+#file the running config
+outfile = open('config_fileGodfrey.txt', 'w')
 outfile.write(config_info)
 
 #Output the running config
